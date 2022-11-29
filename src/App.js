@@ -7,6 +7,8 @@ import Total from "./components/total";
 
 function App() {
   const [projectedTotal, setProjectedTotal] = useState([]);
+  const [actualTotal, setActualTotal] = useState([]);
+
   const [inputList, setInputList] = useState([]);
 
   function handleProjectedTotal() {}
@@ -14,7 +16,7 @@ function App() {
     return (
       <div className="deposit-column">
         <ProjectedCash setProjectedArray={setProjectedArray} />
-        <ActualCash setProjectedArray={setProjectedArray} />
+        <ActualCash setActualArray={setActualArray} />
       </div>
     );
   };
@@ -23,6 +25,9 @@ function App() {
   };
   function setProjectedArray(total) {
     setProjectedTotal((current) => [...current, total]);
+  }
+  function setActualArray(total) {
+    setActualTotal((current) => [...current, total]);
   }
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,12 +41,12 @@ function App() {
         <div className="deposit-column">
           <ProjectedCash setProjectedArray={setProjectedArray} />
 
-          <ActualCash setProjectedArray={setProjectedArray} />
+          <ActualCash setActualArray={setActualArray} />
           <Total total={projectedTotal} />
         </div>
         <div className="deposit-column">
           <ProjectedCash setProjectedArray={setProjectedArray} />
-          <ActualCash setProjectedArray={setProjectedArray} />
+          <ActualCash setActualArray={setActualArray} />
         </div>
 
         {inputList}
