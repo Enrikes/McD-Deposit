@@ -24,11 +24,15 @@ function App() {
   function setProjectedArray(total) {
     setProjectedTotal((current) => [...current, total]);
   }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event);
+  };
 
   return (
     <div className="deposit-container">
       <button onClick={onAddBtnClick}>Add more?</button>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="deposit-column">
           <ProjectedCash setProjectedArray={setProjectedArray} />
 
@@ -39,7 +43,9 @@ function App() {
           <ProjectedCash setProjectedArray={setProjectedArray} />
           <ActualCash setProjectedArray={setProjectedArray} />
         </div>
+
         {inputList}
+        <input type="submit" value="Submit"></input>
       </form>
     </div>
   );
