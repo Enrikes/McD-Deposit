@@ -8,48 +8,52 @@ import Total from "./components/total";
 function App() {
   const [projectedTotal, setProjectedTotal] = useState([]);
   const [actualTotal, setActualTotal] = useState([]);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [inputFields, setInputFields] = useState([
+    { projectedCash: null, actualCash: null },
+  ]);
 
-  const [inputList, setInputList] = useState([]);
-
-  function handleProjectedTotal() {}
-  const Column = () => {
-    return (
-      <div className="deposit-column">
-        <ProjectedCash setProjectedArray={setProjectedArray} />
-        <ActualCash setActualArray={setActualArray} />
-      </div>
-    );
-  };
-  const onAddBtnClick = (event) => {
-    setInputList(inputList.concat(<Column key={inputList.length} />));
-  };
-  function setProjectedArray(total) {
-    setProjectedTotal((current) => [...current, total]);
-  }
-  function setActualArray(total) {
-    setActualTotal((current) => [...current, total]);
-  }
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
+    setIsSubmit(!isSubmit);
+    console.log(inputFields);
+  };
+  const addFields = () => {
+    let newfield = { projectedCash: null, actualCash: null };
+    setInputFields([...inputFields, newfield]);
+  };
+  const handleFormChange = (index, event) => {
+    parseInt(event.target.value);
+    let data = [...inputFields];
+    data[index][event.target.name] = event.target.value;
+    setInputFields(data);
   };
 
   return (
     <div className="deposit-container">
-      <button onClick={onAddBtnClick}>Add more?</button>
+      <button onClick={addFields}>Add more?</button>
       <form onSubmit={handleSubmit}>
-        <div className="deposit-column">
-          <ProjectedCash setProjectedArray={setProjectedArray} />
+        {inputFields.map((input, index) => {
+          return (
+            <div className="deposit-column" key={index}>
+              <input
+                type="number"
+                name="projectedCash"
+                placeholder="Projected Cash"
+                value={input.projectedCash}
+                onChange={(event) => handleFormChange(index, event)}
+              ></input>
+              <input
+                type="number"
+                name="actualCash"
+                placeholder="Actual Cash"
+                value={input.actualCash}
+                onChange={(event) => handleFormChange(index, event)}
+              ></input>
+            </div>
+          );
+        })}
 
-          <ActualCash setActualArray={setActualArray} />
-          <Total total={projectedTotal} />
-        </div>
-        <div className="deposit-column">
-          <ProjectedCash setProjectedArray={setProjectedArray} />
-          <ActualCash setActualArray={setActualArray} />
-        </div>
-
-        {inputList}
         <input type="submit" value="Submit"></input>
       </form>
     </div>
