@@ -2,24 +2,29 @@ import logo from "./logo.svg";
 import "./App.css";
 import ProjectedCash from "./components/projectedCash";
 import ActualCash from "./components/actualCash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Total from "./components/total";
 
 function App() {
-  const [projectedTotal, setProjectedTotal] = useState([]);
+  let [projectedTotal, setProjectedTotal] = useState();
   const [actualTotal, setActualTotal] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
   const [inputFields, setInputFields] = useState([
-    { projectedCash: null, actualCash: null },
+    { projectedCash: "", actualCash: "" },
   ]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsSubmit(!isSubmit);
-    console.log(inputFields);
+    let sum = 0;
+    inputFields.map((rawProjectedTotal) => {
+      let convertedTotal = parseFloat(rawProjectedTotal.projectedCash);
+      sum += convertedTotal;
+      setProjectedTotal(sum);
+    });
   };
+
   const addFields = () => {
-    let newfield = { projectedCash: null, actualCash: null };
+    let newfield = { projectedCash: "", actualCash: "" };
     setInputFields([...inputFields, newfield]);
   };
   const handleFormChange = (index, event) => {
@@ -27,6 +32,12 @@ function App() {
     let data = [...inputFields];
     data[index][event.target.name] = event.target.value;
     setInputFields(data);
+  };
+  const projectedDeposit = (index) => {
+    const projectedCash = parseFloat(inputFields[index].projectedCash);
+    const nextProjectedCash = parseFloat(inputFields[index + 1]?.projectedCash);
+
+    return projectedCash + nextProjectedCash;
   };
 
   return (
@@ -50,9 +61,13 @@ function App() {
                 value={input.actualCash}
                 onChange={(event) => handleFormChange(index, event)}
               ></input>
+              <div className="total">
+                Projected Deposit:{projectedDeposit(index)}
+              </div>
             </div>
           );
         })}
+        <div className="total">Projected Deposit:{projectedTotal}</div>
 
         <input type="submit" value="Submit"></input>
       </form>
