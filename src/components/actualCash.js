@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
-export default function ActualCash({ setProjectedArray }) {
-  function handleSubmit(input) {
-    setProjectedArray(input);
-  }
+import React, { useEffect, useRef, useState } from "react";
+export default function ActualCash({ actualTotal, onChange, index }) {
   return (
     <input
       type="number"
-      onSubmit={(e) => {
-        handleSubmit(e.target.value);
-      }}
-      name="Actual Cash"
+      name="actualCash"
       placeholder="Actual Cash"
+      onChange={(event) => onChange(index, event)}
+      value={actualTotal}
     ></input>
   );
 }

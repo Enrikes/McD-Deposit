@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-export default function ProjectedCash({ setProjectedArray }) {
-  function handleSubmit(input) {
-    setProjectedArray(input);
-  }
+export default function ProjectedCash({ projectedCash, onChange, index }) {
   return (
     <input
       type="number"
-      onSubmit={(e) => {
-        handleSubmit(e.target.value);
+      name="projectedCash"
+      placeholder="Projected Cash test"
+      onChange={(event) => {
+        onChange(index, event);
       }}
-      name="Projected Cash"
-      placeholder="Projected Cash"
+      value={projectedCash}
     ></input>
   );
 }
