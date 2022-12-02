@@ -2,13 +2,21 @@ body {
   background-color: #121212;
 }
 .deposit-container {
-  display: flex;
-  flex-direction: column;
-  width: 20%;
+  display: inline-block;
   background-color: #3b3b3b;
   padding: 10px;
   margin: 0 auto;
 }
+.deposit-column {
+  display: flex;
+  flex-direction: column;
+}
 .total {
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+.form-container {
+  display: flex;
+  flex-direction: row;
 }
