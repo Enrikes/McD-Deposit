@@ -4,6 +4,7 @@ import ProjectedCash from "./components/projectedCash";
 import ActualCash from "./components/actualCash";
 import { useEffect, useState } from "react";
 import Total from "./components/total";
+import Difference from "./components/difference";
 
 function App() {
   let [projectedTotal, setProjectedTotal] = useState();
@@ -12,6 +13,7 @@ function App() {
   const [inputFields, setInputFields] = useState([
     { projectedCash: "", actualCash: "" },
   ]);
+  const [difference, setDifference] = useState();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,8 +21,6 @@ function App() {
     let sum = 0;
     let actualCashSum = 0;
     inputFields.map((rawProjectedTotal) => {
-      let convertedTotal = parseFloat(rawProjectedTotal.projectedCash);
-      sum += convertedTotal;
       let convertedProjectedTotal = parseFloat(rawProjectedTotal.projectedCash);
       let convertedActualTotal = parseFloat(rawProjectedTotal.actualCash);
       actualCashSum += convertedActualTotal;
@@ -29,6 +29,7 @@ function App() {
       setProjectedTotal(sum);
       setActualTotal(actualCashSum);
     });
+    setDifference();
   };
 
   const addFields = () => {
@@ -65,6 +66,7 @@ function App() {
                 onChange={handleFormChange}
                 index={index}
               />
+              <Difference rawDifference={inputFields} />
             </div>
           );
         })}
