@@ -31,6 +31,11 @@ function App() {
     });
     setDifference();
   };
+  document.addEventListener("wheel", function (event) {
+    if (document.activeElement.type === "number") {
+      document.activeElement.blur();
+    }
+  });
 
   const addFields = () => {
     let newfield = { projectedCash: "", actualCash: "" };
