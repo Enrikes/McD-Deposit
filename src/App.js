@@ -66,7 +66,7 @@ function App() {
                 onChange={handleFormChange}
                 index={index}
               />
-              <Difference rawDifference={inputFields} />
+              <Difference rawDifference={inputFields} index={index} />
             </div>
           );
         })}
