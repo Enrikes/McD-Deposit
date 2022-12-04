@@ -47,12 +47,6 @@ function App() {
     data[index][event.target.name] = event.target.value;
     setInputFields(data);
   };
-  const projectedDeposit = (index) => {
-    const projectedCash = parseFloat(inputFields[index].projectedCash);
-    const nextProjectedCash = parseFloat(inputFields[index + 1]?.projectedCash);
-
-    return projectedCash + nextProjectedCash;
-  };
 
   return (
     <div className="deposit-container">
