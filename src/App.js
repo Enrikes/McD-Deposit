@@ -3,6 +3,7 @@ import ProjectedCash from "./components/projectedCash";
 import ActualCash from "./components/actualCash";
 import { useEffect, useState } from "react";
 import Total from "./components/total";
+import ReactTable, { useTable } from "react-table";
 import Difference from "./components/difference";
 
 function App() {
