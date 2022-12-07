@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import ProjectedCash from "./components/projectedCash";
 import ActualCash from "./components/actualCash";
